@@ -19,6 +19,7 @@ function Game({ socket, roomCode, onLeaveRoom }) {
   const [chatMessages, setChatMessages] = useState([]);
   const [correctGuess, setCorrectGuess] = useState(false);
   const [correctGuessMessage, setCorrectGuessMessage] = useState("");
+  const [wrongGuessMessage, setWrongGuessMessage] = useState("");
   const [guessLimitReached, setGuessLimitReached] = useState(false);
   const [scores, setScores] = useState({});
   const [playerNames, setPlayerNames] = useState({});
@@ -34,6 +35,8 @@ function Game({ socket, roomCode, onLeaveRoom }) {
 
   useEffect(() => {
     let countdownInterval = null;
+    let correctFeedbackTimeout = null;
+let wrongFeedbackTimeout = null;
 
     const drawSegment = (context, segment) => {
       if (!segment?.from || !segment?.to) return;
@@ -150,6 +153,17 @@ function Game({ socket, roomCode, onLeaveRoom }) {
         ...previous,
         `${name}: ${submittedGuess}`,
       ]);
+      if (playerId === socket.id) {
+  setWrongGuessMessage("❌ Not quite right — try again!");
+
+  if (wrongFeedbackTimeout) {
+    clearTimeout(wrongFeedbackTimeout);
+  }
+
+  wrongFeedbackTimeout = setTimeout(() => {
+    setWrongGuessMessage("");
+  }, 3000);
+}
     };
 
     const handleChatMessage = ({ playerId, playerName, text, timestamp }) => {
@@ -187,8 +201,15 @@ function Game({ socket, roomCode, onLeaveRoom }) {
         setGuess("");
       }
 
-      setCorrectGuessMessage(message);
+     setCorrectGuessMessage(message);
+if (correctFeedbackTimeout) {
+  clearTimeout(correctFeedbackTimeout);
+}
 
+correctFeedbackTimeout = setTimeout(() => {
+  setCorrectGuessMessage("");
+  correctFeedbackTimeout = null;
+}, 3000);
       setMessages((previous) => [
         ...previous,
         message,
@@ -279,10 +300,12 @@ function Game({ socket, roomCode, onLeaveRoom }) {
         setTimeLeft(0);
         setCorrectGuess(false);
         setCorrectGuessMessage("");
+        setWrongGuessMessage("");
         setGuessLimitReached(false);
         setGuess("");
         setRoundEndedWord("");
         setHint("");
+        
 
         if (countdownInterval) {
           clearInterval(countdownInterval);
@@ -378,6 +401,13 @@ function Game({ socket, roomCode, onLeaveRoom }) {
       if (countdownInterval) {
         clearInterval(countdownInterval);
       }
+      if (correctFeedbackTimeout) {
+  clearTimeout(correctFeedbackTimeout);
+}
+
+if (wrongFeedbackTimeout) {
+  clearTimeout(wrongFeedbackTimeout);
+}
 
       socket.off("draw-line", handleDrawLine);
       socket.off("canvas-updated", handleCanvasUpdated);
@@ -484,8 +514,10 @@ function Game({ socket, roomCode, onLeaveRoom }) {
 
      <GameFeedback
   correctGuessMessage={correctGuessMessage}
+  wrongGuessMessage={wrongGuessMessage}
   restartError={restartError}
   roundEndedWord={roundEndedWord}
+  
 />
       <div className="game-layout">
    

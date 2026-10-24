@@ -217,11 +217,26 @@
   font-weight: 700;
 }
 
+
 .game-feedback-success {
-  border-color: #b8f0d8;
+  position: fixed;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  width: min(90%, 520px);
+  margin: 0;
+  padding: 24px 30px;
+  border: 2px solid #16a673;
+  border-radius: 18px;
   background: #e7fbf1;
   color: #087c53;
+  box-shadow: 0 12px 40px rgb(0 0 0 / 20%);
+  text-align: center;
+  font-size: 26px;
+  font-weight: 850;
 }
+
 
 .game-feedback-error {
   border-color: #ffd0d7;
