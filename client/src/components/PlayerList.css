@@ -1,0 +1,146 @@
+
+.player-list {
+  width: 100%;
+  min-width: 0;
+  color: #252943;
+}
+
+.player-list-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.player-list-heading h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 850;
+  letter-spacing: -0.4px;
+}
+
+.player-list-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  min-height: 28px;
+  padding: 5px 9px;
+  border-radius: 8px;
+  background: #eeecff;
+  color: #5146c8;
+  font-size: 11px;
+  font-weight: 850;
+}
+
+.player-list-empty {
+  margin: 0;
+  padding: 18px 12px;
+  border: 1px dashed #e1e3ef;
+  border-radius: 12px;
+  color: #81869e;
+  font-size: 12px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.player-list-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.player-list-item {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-width: 0;
+  padding: 11px;
+  border: 1px solid #ececf5;
+  border-radius: 12px;
+  background: #fbfbfe;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    transform 160ms ease;
+}
+
+.player-list-item:hover {
+  transform: translateY(-1px);
+  border-color: #dedaff;
+  background: #f7f6ff;
+}
+
+.player-list-avatar {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  place-items: center;
+  border-radius: 12px;
+  background: #e8e6ff;
+  color: #5146c8;
+  font-size: 14px;
+  font-weight: 850;
+}
+
+.player-avatar-1 {
+  background: #dcf8ec;
+  color: #087c53;
+}
+
+.player-avatar-2 {
+  background: #fff0db;
+  color: #9a5a08;
+}
+
+.player-avatar-3 {
+  background: #ffe5e9;
+  color: #bf3650;
+}
+
+.player-avatar-4 {
+  background: #e0f1ff;
+  color: #1766a5;
+}
+
+.player-avatar-5 {
+  background: #f7e4ff;
+  color: #8538a4;
+}
+
+.player-list-name {
+  flex: 1;
+  min-width: 0;
+  color: #383d57;
+  font-size: 12px;
+  font-weight: 750;
+  overflow-wrap: anywhere;
+}
+
+.player-list-host {
+  flex-shrink: 0;
+  padding: 5px 6px;
+  border-radius: 6px;
+  background: #fff4d8;
+  color: #93640a;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 380px) {
+  .player-list-item {
+    gap: 8px;
+    padding: 9px;
+  }
+
+  .player-list-avatar {
+    width: 34px;
+    height: 34px;
+  }
+}

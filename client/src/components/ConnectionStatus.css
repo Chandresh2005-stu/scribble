@@ -1,0 +1,69 @@
+
+.connection-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  max-width: 100%;
+  padding: 8px 11px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 750;
+  line-height: 1.4;
+}
+
+.connection-status-dot {
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+
+.connection-connected {
+  border-color: #c8f1df;
+  background: #e8fbf2;
+  color: #087c53;
+}
+
+.connection-connected .connection-status-dot {
+  background: #16a673;
+  box-shadow: 0 0 0 3px rgb(22 166 115 / 12%);
+}
+
+.connection-connecting {
+  border-color: #f6e3b3;
+  background: #fff8e6;
+  color: #946200;
+}
+
+.connection-connecting .connection-status-dot {
+  background: #e8ad28;
+  animation: connection-pulse 1s ease-in-out infinite alternate;
+}
+
+.connection-disconnected {
+  border-color: #ffd4da;
+  background: #fff0f2;
+  color: #b4233a;
+}
+
+.connection-disconnected .connection-status-dot {
+  background: #e44f62;
+}
+
+@keyframes connection-pulse {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0.35;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .connection-status-dot {
+    animation: none;
+  }
+}
