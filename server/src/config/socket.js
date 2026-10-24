@@ -1,18 +1,26 @@
+
 const { Server } = require("socket.io");
+
 const registerRoomHandlers = require("../handlers/roomHandlers");
 const registerDrawingHandlers = require("../handlers/drawingHandlers");
 const registerGameHandlers = require("../handlers/gameHandlers");
 
 function initializeSocket(httpServer) {
+  const allowedOrigins = [
+    "http://localhost:5173",
+    process.env.CLIENT_URL,
+  ].filter(Boolean);
+
   const io = new Server(httpServer, {
     cors: {
-      origin: "http://localhost:5173",
+      origin: allowedOrigins,
       methods: ["GET", "POST"],
     },
   });
 
   io.on("connection", (socket) => {
     console.log("Player connected:", socket.id);
+
     registerRoomHandlers(io, socket);
     registerDrawingHandlers(io, socket);
     registerGameHandlers(io, socket);

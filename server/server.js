@@ -1,3 +1,4 @@
+
 const express = require("express");
 const cors = require("cors");
 const { createServer } = require("http");
@@ -8,13 +9,16 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+
 registerRoutes(app);
 
 const httpServer = createServer(app);
+
 initializeSocket(httpServer);
 
-const PORT = 3000;
+// Use Render's assigned port in production and port 3000 locally.
+const PORT = process.env.PORT || 3000;
 
 httpServer.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
